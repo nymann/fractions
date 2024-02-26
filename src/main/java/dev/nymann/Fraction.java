@@ -22,7 +22,10 @@ public class Fraction {
         return fraction.numerator == numerator && fraction.denominator == denominator;
     }
 
-    public Fraction plus(Fraction b) {
+    public Fraction plus(Fraction fraction) {
+        if (fraction.denominator != denominator) {
+            throw new RuntimeException("Not implemented");
+        }
         return new Fraction(1, 2);
     }
 }

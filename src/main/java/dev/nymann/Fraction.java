@@ -26,6 +26,9 @@ public class Fraction {
         if (fraction.numerator == 0 && numerator == 0) {
             return new Fraction(0, 0);
         }
+        if (fraction.denominator == 0 || denominator == 0) {
+            throw new ZeroDivisionError();
+        }
         if (fraction.denominator != denominator) {
             throw new RuntimeException("Not implemented");
         }

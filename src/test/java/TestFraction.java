@@ -1,4 +1,5 @@
 import dev.nymann.Fraction;
+import dev.nymann.ZeroDivisionError;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -24,4 +25,12 @@ public class TestFraction {
         var expected = new Fraction(0, 0);
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void zeroDivisionError() {
+        assertThrowsExactly(ZeroDivisionError.class, () -> {
+            new Fraction(1, 0).plus(new Fraction(1, 2));
+        });
+    }
+
 }

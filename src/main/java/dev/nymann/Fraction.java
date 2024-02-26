@@ -26,6 +26,10 @@ public class Fraction {
         if (fraction.denominator != denominator) {
             throw new RuntimeException("Not implemented");
         }
-        return new Fraction(1, 2);
+        var n = fraction.numerator + numerator;
+        if(denominator % n == 0) {
+            return new Fraction(1, denominator / n);
+        }
+        throw new RuntimeException("Not implemented");
     }
 }

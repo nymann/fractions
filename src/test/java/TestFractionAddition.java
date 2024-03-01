@@ -4,9 +4,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class TestFraction {
+public class TestFractionAddition {
     @Test
-    public void testSimpleFraction() {
+    public void testEqualDenominators() {
         Fraction actual = new Fraction(1, 4).plus(new Fraction(1, 4));
         Fraction expected = new Fraction(1, 2);
         assertEquals(expected, actual);
@@ -17,6 +17,12 @@ public class TestFraction {
         var actual = new Fraction(1, 8).plus(new Fraction(3, 8));
         var expected = new Fraction(1, 2);
         assertEquals(expected, actual);
+    }
+
+    @Test
+    public void equalsWholeFraction() {
+        var expected = new Fraction(1);
+        assertEquals(expected, new Fraction(1, 2).plus(new Fraction(1, 2)));
     }
 
     @Test
@@ -33,4 +39,10 @@ public class TestFraction {
         });
     }
 
+    @Test
+    public void testNonEqualDenominators() {
+        var actual = new Fraction(1, 4).plus(new Fraction(1, 2));
+        var expected = new Fraction(3, 4);
+        assertEquals(expected, actual);
+    }
 }

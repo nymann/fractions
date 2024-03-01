@@ -5,9 +5,23 @@ public class Fraction {
     private final int denominator;
 
     public Fraction(int numerator, int denominator) {
+        int gcd = 1;
+        if (denominator > 0) {
+            gcd = this.greatestCommonDivisor(numerator, denominator);
+        }
+        this.numerator = numerator / gcd;
+        this.denominator = denominator / gcd;
+    }
 
-        this.numerator = numerator;
-        this.denominator = denominator;
+    public Fraction(int numerator) {
+        this(numerator, 1);
+    }
+
+    private int greatestCommonDivisor(int a, int b) {
+        if (b == 0) {
+            return a;
+        }
+        return greatestCommonDivisor(b, a % b);
     }
 
     @Override
@@ -22,20 +36,19 @@ public class Fraction {
         return fraction.numerator == numerator && fraction.denominator == denominator;
     }
 
-    public Fraction plus(Fraction fraction) {
-        if (fraction.numerator == 0 && numerator == 0) {
+    public Fraction plus(Fraction that) {
+        if (that.numerator == 0 && numerator == 0) {
             return new Fraction(0, 0);
         }
-        if (fraction.denominator == 0 || denominator == 0) {
+        if (that.denominator == 0 || denominator == 0) {
             throw new ZeroDivisionError();
         }
-        if (fraction.denominator != denominator) {
-            throw new RuntimeException("Not implemented");
-        }
-        var n = fraction.numerator + numerator;
-        if (denominator % n == 0) {
-            return new Fraction(1, denominator / n);
-        }
-        throw new RuntimeException("Not implemented");
+
+        return new Fraction(this.numerator * that.denominator + this.denominator * that.numerator, this.denominator * that.denominator);
+    }
+
+    @Override
+    public String toString() {
+        return numerator + "/" + denominator;
     }
 }
